@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "payload migrate && next start",
     "lint": "eslint",
     "payload:migrate": "payload migrate",
     "payload:seed": "payload run src/seed/index.ts"
