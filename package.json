@@ -10,6 +10,9 @@
     "payload:migrate": "payload migrate",
     "payload:seed": "payload run src/seed/index.ts"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.84.1",
     "@payloadcms/next": "^3.84.1",
