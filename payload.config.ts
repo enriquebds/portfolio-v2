@@ -20,6 +20,7 @@ export default buildConfig({
   editor: lexicalEditor({}),
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL || '' },
+    push: true,
   }),
   secret: process.env.PAYLOAD_SECRET || 'dev-secret-change-in-production',
   typescript: {
