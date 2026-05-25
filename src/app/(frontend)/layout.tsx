@@ -18,7 +18,7 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
         <title>Enrique Barbosa — Front-end Engineer</title>
         <meta name="description" content="Portfólio de Enrique Barbosa, Front-end Engineer especializado em React, TypeScript e B2B SaaS." />
       </head>
-      <body>
+      <body className="frontend">
         <CustomCursor />
         <ScrollProgress />
         <Header theme={theme} onToggleTheme={toggleTheme} />

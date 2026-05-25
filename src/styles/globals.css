@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-@import "tailwindcss";
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -32,7 +33,7 @@
 
 html { scroll-behavior: smooth; }
 
-body {
+body.frontend {
   background-color: var(--bg);
   color: var(--text);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -41,7 +42,9 @@ body {
   font-family: 'DM Sans', sans-serif;
 }
 
-body::before {
+@media (max-width: 768px) { body.frontend { cursor: auto; } }
+
+body.frontend::before {
   content: '';
   position: fixed;
   inset: 0;
@@ -61,7 +64,6 @@ body::before {
 
 * { box-sizing: border-box; }
 
-@media (max-width: 768px) { body { cursor: auto; } }
 
 .font-display { font-family: 'Syne', sans-serif; }
 .font-mono { font-family: 'JetBrains Mono', monospace; }
