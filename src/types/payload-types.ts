@@ -125,10 +125,6 @@ export interface UserAuthOperations {
     password: string;
   };
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "projects".
- */
 export interface Project {
   id: number;
   title: string;
@@ -164,10 +160,6 @@ export interface Project {
   updatedAt: string;
   createdAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
 export interface Media {
   id: number;
   alt?: string | null;
@@ -183,10 +175,6 @@ export interface Media {
   focalX?: number | null;
   focalY?: number | null;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "experience".
- */
 export interface Experience {
   id: number;
   company: string;
@@ -211,10 +199,6 @@ export interface Experience {
   updatedAt: string;
   createdAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "certifications".
- */
 export interface Certification {
   id: number;
   title: string;
@@ -226,10 +210,6 @@ export interface Certification {
   updatedAt: string;
   createdAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "skills".
- */
 export interface Skill {
   id: number;
   name: string;
@@ -240,10 +220,6 @@ export interface Skill {
   updatedAt: string;
   createdAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-kv".
- */
 export interface PayloadKv {
   id: number;
   key: string;
@@ -257,10 +233,6 @@ export interface PayloadKv {
     | boolean
     | null;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
 export interface User {
   id: number;
   updatedAt: string;
@@ -282,10 +254,6 @@ export interface User {
   password?: string | null;
   collection: 'users';
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-locked-documents".
- */
 export interface PayloadLockedDocument {
   id: number;
   document?:
@@ -321,10 +289,6 @@ export interface PayloadLockedDocument {
   updatedAt: string;
   createdAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-preferences".
- */
 export interface PayloadPreference {
   id: number;
   user: {
@@ -344,10 +308,6 @@ export interface PayloadPreference {
   updatedAt: string;
   createdAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-migrations".
- */
 export interface PayloadMigration {
   id: number;
   name?: string | null;
@@ -355,10 +315,6 @@ export interface PayloadMigration {
   updatedAt: string;
   createdAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "projects_select".
- */
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
@@ -379,10 +335,6 @@ export interface ProjectsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "experience_select".
- */
 export interface ExperienceSelect<T extends boolean = true> {
   company?: T;
   role?: T;
@@ -406,10 +358,6 @@ export interface ExperienceSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "certifications_select".
- */
 export interface CertificationsSelect<T extends boolean = true> {
   title?: T;
   issuer?: T;
@@ -420,10 +368,6 @@ export interface CertificationsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "skills_select".
- */
 export interface SkillsSelect<T extends boolean = true> {
   name?: T;
   category?: T;
@@ -433,10 +377,6 @@ export interface SkillsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   updatedAt?: T;
@@ -445,24 +385,15 @@ export interface MediaSelect<T extends boolean = true> {
   thumbnailURL?: T;
   filename?: T;
   mimeType?: T;
-  filesize?: T;
   width?: T;
   height?: T;
   focalX?: T;
   focalY?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-kv_select".
- */
 export interface PayloadKvSelect<T extends boolean = true> {
   key?: T;
   data?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
- */
 export interface UsersSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
@@ -481,10 +412,6 @@ export interface UsersSelect<T extends boolean = true> {
         expiresAt?: T;
       };
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-locked-documents_select".
- */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
   document?: T;
   globalSlug?: T;
@@ -492,10 +419,6 @@ export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-preferences_select".
- */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
   user?: T;
   key?: T;
@@ -503,30 +426,18 @@ export interface PayloadPreferencesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-migrations_select".
- */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
   name?: T;
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "collections_widget".
- */
 export interface CollectionsWidget {
   data?: {
     [k: string]: unknown;
   };
   width: 'full';
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "auth".
- */
 export interface Auth {
   [k: string]: unknown;
 }
