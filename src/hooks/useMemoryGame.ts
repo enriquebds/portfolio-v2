@@ -27,8 +27,19 @@ function createCards(): Card[] {
   return fisherYates(pairs)
 }
 
+function createUnshuffledCards(): Card[] {
+  return TECH_PAIRS.flatMap((tech, idx) => [
+    { id: idx * 2, pairId: tech.id, techName: tech.name, isFlipped: false, isMatched: false },
+    { id: idx * 2 + 1, pairId: tech.id, techName: tech.name, isFlipped: false, isMatched: false },
+  ])
+}
+
 export function useMemoryGame(): UseMemoryGameReturn {
-  const [cards, setCards] = useState<Card[]>(createCards)
+  const [cards, setCards] = useState<Card[]>(createUnshuffledCards)
+
+  useEffect(() => {
+    setCards(createCards())
+  }, [])
   const [attempts, setAttempts] = useState(0)
   const [time, setTime] = useState(0)
   const [gameState, setGameState] = useState<GameState>('idle')
