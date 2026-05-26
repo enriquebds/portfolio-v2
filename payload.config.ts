@@ -13,9 +13,18 @@ import { fileURLToPath } from 'url'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+const devOrigins = process.env.NODE_ENV === 'development'
+  ? ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002']
+  : []
+const allowedOrigins = Array.from(new Set([serverURL, ...devOrigins].filter(Boolean)))
+
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  serverURL,
+  cors: allowedOrigins,
+  csrf: allowedOrigins,
   admin: {
+    user: 'users',
     meta: { titleSuffix: '— Enrique Barbosa' },
   },
   collections: [Users, Projects, Experience, Certifications, Skills, Media],

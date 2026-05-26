@@ -33,6 +33,13 @@
 
 html { scroll-behavior: smooth; }
 
+/* Preflight resets scoped to frontend — replaces the global Tailwind preflight
+   that was removed to avoid breaking the Payload admin */
+body.frontend a { color: inherit; text-decoration: inherit; }
+body.frontend button { cursor: pointer; background-color: inherit; border: none }
+body.frontend ul, body.frontend ol { list-style: none; margin: 0; padding: 0; }
+body.frontend img, body.frontend svg, body.frontend video { display: block; }
+
 body.frontend {
   background-color: var(--bg);
   color: var(--text);
