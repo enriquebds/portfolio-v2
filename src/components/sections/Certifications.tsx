@@ -22,8 +22,8 @@ export function Certifications({ certifications }: { certifications: Certificati
                 <motion.div key={cert.id} variants={cardVariants} className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-accent/40 transition-colors group" whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-body font-medium text-sm text-[var(--text)] group-hover:text-accent transition-colors">{cert.title}</p>
-                      <p className="font-mono text-xs text-[var(--muted)] mt-0.5">{cert.issuer}</p>
+                      <p className="font-mono font-medium text-xs text-(--text) mt-0.5">{cert.issuer}</p> 
+                      <p className="font-body  text-sm text-(--muted) group-hover:text-accent transition-colors">{cert.title}</p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       {cert.date && <span className="font-mono text-[10px] text-[var(--muted)]">{cert.date}</span>}
