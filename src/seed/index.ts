@@ -1,5 +1,6 @@
 import payload from 'payload'
 import config from '../../payload.config'
+import { Certification, Project, Skill } from '@/types/payload-types'
 
 async function seed() {
   await payload.init({ config })
@@ -32,7 +33,7 @@ async function seed() {
           { tech: 'NestJS' }, { tech: 'Express' }, { tech: 'PostgreSQL' },
           { tech: 'Docker' }, { tech: 'Git' }, { tech: 'Figma' },
         ],
-      } as any,
+      },
     })
     console.log('✅ Experience seeded')
   }
@@ -51,7 +52,7 @@ async function seed() {
       { title: 'Desenvolvimento Web Full Stack (2.000h)', issuer: 'Kenzie Academy Brasil', type: 'degree', date: 'jan/2022 – jan/2023', order: 9 },
     ]
     for (const cert of certs) {
-      await payload.create({ collection: 'certifications', data: cert as any })
+      await payload.create({ collection: 'certifications', data: cert as Certification })
     }
     console.log('✅ Certifications seeded')
   }
@@ -84,7 +85,7 @@ async function seed() {
       { name: 'Figma', category: 'softskills', level: 'intermediario', icon: 'SiFigma', order: 3 },
     ]
     for (const skill of skills) {
-      await payload.create({ collection: 'skills', data: skill as any })
+      await payload.create({ collection: 'skills', data: skill as Skill })
     }
     console.log('✅ Skills seeded')
   }
@@ -97,7 +98,7 @@ async function seed() {
       { title: 'Portfólio v2', slug: 'portfolio-v2', description: 'Portfólio pessoal construído com Next.js 15, Payload CMS 3 e PostgreSQL. Design "Terminal meets Editorial".', status: 'coming-soon', featured: false, order: 3, githubUrl: 'https://github.com/enriquebds/portfolio-v2', stack: [{ tech: 'Next.js' }, { tech: 'Payload CMS' }, { tech: 'PostgreSQL' }, { tech: 'Framer Motion' }] },
     ]
     for (const project of projects) {
-      await payload.create({ collection: 'projects', data: project as any })
+      await payload.create({ collection: 'projects', data: project as Project })
     }
     console.log('✅ Projects seeded')
   }
