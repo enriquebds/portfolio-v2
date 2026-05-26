@@ -52,7 +52,7 @@ export interface Card {
   isMatched: boolean
 }
 
-export type GameState = 'idle' | 'playing' | 'won'
+export type GameState = 'idle' | 'preview' | 'playing' | 'won'
 
 export interface UseMemoryGameReturn {
   cards: Card[]
@@ -60,6 +60,7 @@ export interface UseMemoryGameReturn {
   time: number
   gameState: GameState
   handleCardClick: (id: number) => void
+  startGame: () => void
   resetGame: () => void
   bestScore: number | null
 }

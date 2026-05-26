@@ -10,6 +10,8 @@ const TECH_PAIRS = [
   { id: 10, name: 'NestJS' },
 ]
 
+const PREVIEW_DURATION_MS = 1000
+
 function fisherYates<T>(array: T[]): T[] {
   const arr = [...array]
   for (let i = arr.length - 1; i > 0; i--) {
@@ -47,6 +49,7 @@ export function useMemoryGame(): UseMemoryGameReturn {
   const flippedIds = useRef<number[]>([])
   const isChecking = useRef(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const previewTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -65,6 +68,7 @@ export function useMemoryGame(): UseMemoryGameReturn {
   }, [gameState])
 
   const handleCardClick = useCallback((id: number) => {
+    if (gameState !== 'playing') return
     if (isChecking.current) return
     if (flippedIds.current.length >= 2) return
     setCards(prev => {
@@ -74,9 +78,6 @@ export function useMemoryGame(): UseMemoryGameReturn {
     })
     if (flippedIds.current.includes(id)) return
     flippedIds.current = [...flippedIds.current, id]
-    if (flippedIds.current.length === 1) {
-      setGameState(gs => gs === 'idle' ? 'playing' : gs)
-    }
     if (flippedIds.current.length === 2) {
       isChecking.current = true
       setAttempts(a => a + 1)
@@ -115,10 +116,27 @@ export function useMemoryGame(): UseMemoryGameReturn {
         }
       })
     }
+  }, [gameState])
+
+  const startGame = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current)
+    if (previewTimeoutRef.current) clearTimeout(previewTimeoutRef.current)
+    flippedIds.current = []
+    isChecking.current = false
+    setCards(createCards().map(c => ({ ...c, isFlipped: true })))
+    setAttempts(0)
+    setTime(0)
+    setGameState('preview')
+    previewTimeoutRef.current = setTimeout(() => {
+      setCards(prev => prev.map(c => ({ ...c, isFlipped: false })))
+      setGameState('playing')
+      previewTimeoutRef.current = null
+    }, PREVIEW_DURATION_MS)
   }, [])
 
   const resetGame = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current)
+    if (previewTimeoutRef.current) clearTimeout(previewTimeoutRef.current)
     flippedIds.current = []
     isChecking.current = false
     setCards(createCards())
@@ -127,5 +145,5 @@ export function useMemoryGame(): UseMemoryGameReturn {
     setGameState('idle')
   }, [])
 
-  return { cards, attempts, time, gameState, handleCardClick, resetGame, bestScore }
+  return { cards, attempts, time, gameState, handleCardClick, startGame, resetGame, bestScore }
 }

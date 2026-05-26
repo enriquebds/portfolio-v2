@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { SiReact, SiTypescript, SiJavascript, SiNodedotjs, SiDocker, SiGit, SiVite, SiPostgresql, SiGraphql, SiNestjs } from 'react-icons/si'
-import { useMemoryGame } from '@/hooks/useMemoryGame'
+import { useMemoryGame } from '@/components/sections/MemoryGame/useMemoryGame'
 import type { Card } from '@/types'
 
 const TECH_ICONS: Record<string, React.ReactNode> = {
@@ -24,10 +24,7 @@ function CardTile({ card, onClick }: { card: Card; onClick: (id: number) => void
     <div className="relative cursor-pointer" style={{ perspective: '600px', aspectRatio: '1' }} onClick={() => onClick(card.id)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClick(card.id) }} tabIndex={0} role="button" aria-label={card.isFlipped || card.isMatched ? card.techName : 'Carta virada'} aria-pressed={card.isFlipped || card.isMatched}>
       <motion.div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }} animate={{ rotateY: card.isFlipped || card.isMatched ? 180 : 0 }} transition={prefersReduced ? { duration: 0 } : { duration: 0.4, ease: [0.22,1,0.36,1] }}>
         <div className="absolute inset-0 rounded-xl flex items-center justify-center border border-[var(--border)] bg-[var(--card)]" style={{ backfaceVisibility: 'hidden' }}>
-          <div className="grid grid-cols-3 gap-1 opacity-20">
-            {Array.from({ length: 9 }).map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#00C896' }} />)}
-          </div>
-          <span className="absolute font-display font-bold text-xs" style={{ color: 'rgba(0,200,150,0.3)' }}>EB</span>
+          {!card.isFlipped && <span className="font-display font-bold text-2xl text-[var(--text)] hover:text-accent transition-colors"><span style={{ color: '#00C896' }}>{'<'}</span>EB<span style={{ color: '#00C896' }}>.</span><span style={{ color: '#00C896' }}>{'/>'}</span></span>}
         </div>
         <div className={`absolute inset-0 rounded-xl flex flex-col items-center justify-center gap-1 border ${card.isMatched ? 'border-accent/40 bg-accent/5' : 'border-[var(--border)] bg-[var(--card)]'}`} style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
           {TECH_ICONS[card.techName]}
@@ -39,7 +36,7 @@ function CardTile({ card, onClick }: { card: Card; onClick: (id: number) => void
 }
 
 export function MemoryGameBoard() {
-  const { cards, attempts, time, gameState, handleCardClick, resetGame, bestScore } = useMemoryGame()
+  const { cards, attempts, time, gameState, handleCardClick, startGame, resetGame, bestScore } = useMemoryGame()
   const fmt = (s: number) => `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -53,9 +50,14 @@ export function MemoryGameBoard() {
       <div className="grid grid-cols-5 gap-2 md:gap-3">
         {cards.map(card => <CardTile key={card.id} card={card} onClick={handleCardClick} />)}
       </div>
-      <div className="mt-6 flex items-center justify-between">
+      <div className="mt-6 flex items-center justify-between gap-4">
         <button onClick={resetGame} className="font-mono text-xs text-[var(--muted)] hover:text-accent transition-colors flex items-center gap-2">↺ reiniciar</button>
-        {gameState === 'idle' && <span className="font-mono text-xs text-[var(--muted)] animate-pulse">clique em uma carta para começar</span>}
+        {gameState === 'idle' && (
+          <button onClick={startGame} className="font-body font-semibold text-sm px-5 py-2 rounded-lg transition-colors" style={{ backgroundColor: '#00C896', color: '#0F111A' }}>
+            ▶ começar
+          </button>
+        )}
+        {gameState === 'preview' && <span className="font-mono text-xs animate-pulse" style={{ color: '#00C896' }}>memorize as cartas...</span>}
       </div>
       <AnimatePresence>
         {gameState === 'won' && (

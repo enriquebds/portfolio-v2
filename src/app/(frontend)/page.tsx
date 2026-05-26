@@ -7,7 +7,7 @@ import { About } from '@/components/sections/About'
 import { Experience } from '@/components/sections/Experience'
 import { Projects } from '@/components/sections/Projects'
 import { Skills } from '@/components/sections/Skills'
-import { MemoryGame } from '@/components/sections/MemoryGame'
+import { MemoryGame } from '@/components/sections/MemoryGame/MemoryGame'
 import { Certifications } from '@/components/sections/Certifications'
 import { Contact } from '@/components/sections/Contact'
 import type { ExperienceItem, ProjectItem, CertificationItem, SkillItem } from '@/types'
@@ -23,25 +23,25 @@ async function getData() {
       payload.find({ collection: 'skills', sort: 'order', limit: 50 }),
     ])
 
-    const experiences: ExperienceItem[] = experienceRes.docs.map((doc: any) => ({
+    const experiences: ExperienceItem[] = experienceRes.docs.map((doc) => ({
       id: String(doc.id),
       company: doc.company || '',
       role: doc.role || '',
       startDate: doc.startDate || '',
       endDate: doc.endDate || null,
       location: doc.location || '',
-      bullets: (doc.description || []).map((d: any) => d.bullet || '').filter(Boolean),
-      stack: (doc.stack || []).map((s: any) => s.tech || '').filter(Boolean),
+      bullets: (doc.description || []).map((d) => d.bullet || '').filter(Boolean),
+      stack: (doc.stack || []).map((s) => s.tech || '').filter(Boolean),
       current: doc.current || false,
       order: doc.order || 0,
     }))
 
-    const projects: ProjectItem[] = projectsRes.docs.map((doc: any) => ({
+    const projects: ProjectItem[] = projectsRes.docs.map((doc) => ({
       id: String(doc.id),
       title: doc.title || '',
       slug: doc.slug || '',
       description: doc.description || '',
-      stack: (doc.stack || []).map((s: any) => s.tech || '').filter(Boolean),
+      stack: (doc.stack || []).map((s) => s.tech || '').filter(Boolean),
       githubUrl: doc.githubUrl || undefined,
       liveUrl: doc.liveUrl || undefined,
       status: doc.status || 'draft',
@@ -49,7 +49,7 @@ async function getData() {
       order: doc.order || 0,
     }))
 
-    const certifications: CertificationItem[] = certsRes.docs.map((doc: any) => ({
+    const certifications: CertificationItem[] = certsRes.docs.map((doc) => ({
       id: String(doc.id),
       title: doc.title || '',
       issuer: doc.issuer || '',
@@ -59,7 +59,7 @@ async function getData() {
       order: doc.order || 0,
     }))
 
-    const skills: SkillItem[] = skillsRes.docs.map((doc: any) => ({
+    const skills: SkillItem[] = skillsRes.docs.map((doc) => ({
       id: String(doc.id),
       name: doc.name || '',
       category: doc.category || 'frontend',
