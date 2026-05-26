@@ -1,39 +1,19 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { useScrollSpy } from '@/hooks/useScrollSpy'
-import { navLinks } from '@/utils/constants'
 import { cn } from '@/utils/cn'
+import { navLinks } from '@/utils/constants'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useHeader } from './useHeader'
+
 
 interface HeaderProps {
   theme: 'light' | 'dark'
   onToggleTheme: () => void
 }
 
-const SECTION_IDS = ['hero', 'about', 'experience', 'projects', 'skills', 'game', 'certifications', 'contact']
-
 export function Header({ theme, onToggleTheme }: HeaderProps) {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const { activeSection } = useScrollSpy(SECTION_IDS)
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [mobileOpen])
-
-  const handleNavClick = (href: string) => {
-    setMobileOpen(false)
-    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const {  scrolled, mobileOpen, activeSection, handleNavClick, setMobileOpen} = useHeader()
 
   return (
     <header

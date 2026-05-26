@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from '@/hooks/useTheme'
-import { Header } from '@/components/layout/Header'
+import { Header } from '@/components/layout/Header/Header'
 import { Footer } from '@/components/layout/Footer'
 import { CustomCursor } from '@/components/cursor/CustomCursor'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
