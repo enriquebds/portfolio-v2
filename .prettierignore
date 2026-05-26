@@ -1,0 +1,15 @@
+# dependencies & build output
+node_modules
+.next
+build
+out
+coverage
+
+# lockfiles & generated
+package-lock.json
+next-env.d.ts
+*.tsbuildinfo
+
+# Payload-generated files
+src/types/payload-types.ts
+src/app/(payload)/admin/**/importMap.ts
