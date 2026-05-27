@@ -3,6 +3,7 @@
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { SiReact, SiTypescript, SiJavascript, SiNodedotjs, SiDocker, SiGit, SiVite, SiPostgresql, SiGraphql, SiNestjs } from 'react-icons/si'
 import { useMemoryGame } from '@/components/sections/MemoryGame/useMemoryGame'
+import { Logo } from '@/components/ui/Logo'
 import type { Card } from '@/types'
 
 const TECH_ICONS: Record<string, React.ReactNode> = {
@@ -24,7 +25,7 @@ function CardTile({ card, onClick }: { card: Card; onClick: (id: number) => void
     <div className="relative cursor-pointer" style={{ perspective: '600px', aspectRatio: '1' }} onClick={() => onClick(card.id)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClick(card.id) }} tabIndex={0} role="button" aria-label={card.isFlipped || card.isMatched ? card.techName : 'Carta virada'} aria-pressed={card.isFlipped || card.isMatched}>
       <motion.div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }} animate={{ rotateY: card.isFlipped || card.isMatched ? 180 : 0 }} transition={prefersReduced ? { duration: 0 } : { duration: 0.4, ease: [0.22,1,0.36,1] }}>
         <div className="absolute inset-0 rounded-xl flex items-center justify-center border border-[var(--border)] bg-[var(--card)]" style={{ backfaceVisibility: 'hidden' }}>
-          {!card.isFlipped && <span className="font-display font-bold text-2xl text-[var(--text)] hover:text-accent transition-colors"><span style={{ color: '#00C896' }}>{'<'}</span>EB<span style={{ color: '#00C896' }}>.</span><span style={{ color: '#00C896' }}>{'/>'}</span></span>}
+          {!card.isFlipped && <Logo variant="tag" />}
         </div>
         <div className={`absolute inset-0 rounded-xl flex flex-col items-center justify-center gap-1 border ${card.isMatched ? 'border-accent/40 bg-accent/5' : 'border-[var(--border)] bg-[var(--card)]'}`} style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
           {TECH_ICONS[card.techName]}
