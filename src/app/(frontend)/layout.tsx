@@ -15,6 +15,7 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/icon.svg" />
         <title>Enrique Barbosa — Front-end Engineer</title>
         <meta name="description" content="Portfólio de Enrique Barbosa, Front-end Engineer especializado em React, TypeScript e B2B SaaS." />
       </head>

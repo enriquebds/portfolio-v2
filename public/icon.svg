@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="BDS">
+  <defs>
+    <linearGradient id="bds-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00C896" />
+      <stop offset="1" stop-color="#0091FF" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bds-gradient)" />
+  <text x="32" y="41" text-anchor="middle"
+    font-family="Syne, 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif"
+    font-weight="800" font-size="25" letter-spacing="-1.5" fill="#FFFFFF">BDS</text>
+</svg>
