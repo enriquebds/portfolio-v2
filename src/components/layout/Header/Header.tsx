@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { Logo } from '@/components/ui/Logo'
 import { cn } from '@/utils/cn'
 import { navLinks } from '@/utils/constants'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -22,8 +23,8 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
     >
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 font-mono text-sm px-3 py-2 rounded-lg z-50" style={{ backgroundColor: '#00C896', color: '#0F111A' }}>Ir para conteúdo principal</a>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <motion.a href="#hero" onClick={e => { e.preventDefault(); handleNavClick('#hero') }} className="font-display font-bold text-2xl text-[var(--text)] hover:text-accent transition-colors" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          EB<span style={{ color: '#00C896' }}>.</span>
+        <motion.a href="#hero" onClick={e => { e.preventDefault(); handleNavClick('#hero') }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Logo />
         </motion.a>
         <nav className="hidden md:flex items-center gap-1" aria-label="Navegação principal">
           {navLinks.map(link => {
