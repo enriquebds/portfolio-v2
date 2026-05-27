@@ -1,29 +1,38 @@
 'use client'
 
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
 import { SectionTitle } from '@/components/ui/SectionTitle'
+import { Button } from '@/components/ui/Button'
 import { staggerContainerVariants, fadeUpVariants } from '@/utils/constants'
 import { useInView } from '@/hooks/useInView'
-
-const CONTACT_ITEMS = [
-  { label: 'Email', value: 'enrique.barbosasilva@gmail.com', href: 'mailto:enrique.barbosasilva@gmail.com', icon: '✉', display: 'enrique.barbosasilva@gmail.com' },
-  { label: 'LinkedIn', value: 'linkedin.com/in/enriquebds', href: 'https://linkedin.com/in/enriquebds', icon: '🔗', display: '/in/enriquebds' },
-  { label: 'GitHub', value: 'github.com/enriquebds', href: 'https://github.com/enriquebds', icon: '⌥', display: '/enriquebds' },
-  { label: 'Telefone', value: '+55 11 97552-0983', href: 'tel:+5511975520983', icon: '📱', display: '+55 11 97552-0983' },
-]
+import { contactSchema, type ContactInput } from '@/validations/contact'
+import { sendContactEmail, type ContactFormState } from '@/actions/contact'
+import { CONTACT_ITEMS, FORM_FIELDS } from './constants'
 
 export function Contact() {
   const { ref, isInView } = useInView({ threshold: 0.1 })
+  const [serverState, setServerState] = useState<ContactFormState>({ status: 'idle' })
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = e.currentTarget
-    const name = (form.elements.namedItem('name') as HTMLInputElement).value
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value
-    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value
-    const body = `Olá Enrique,\n\nMeu nome é ${name} (${email}).\n\n${message}`
-    window.location.href = `mailto:enrique.barbosasilva@gmail.com?subject=Contato via portfólio&body=${encodeURIComponent(body)}`
-  }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<ContactInput>({
+    resolver: zodResolver(contactSchema),
+    mode: 'onChange',
+  })
+
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await sendContactEmail(data)
+    setServerState(result)
+    if (result.status === 'success') reset()
+  })
+
+  const isBusy = isSubmitting || !isValid
 
   return (
     <section id="contact" aria-labelledby="contact-heading" className="py-24 md:py-32 bg-[var(--card)]">
@@ -46,18 +55,53 @@ export function Contact() {
               <p className="font-body text-sm text-[var(--text)]">Aberto a oportunidades <strong>CLT ou PJ</strong> — Híbrido ou Remoto · São Paulo, SP</p>
             </motion.div>
           </motion.div>
-          <motion.form onSubmit={handleSubmit} variants={staggerContainerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="space-y-4" aria-label="Formulário de contato">
-            {[{name:'name',label:'Nome',type:'text',placeholder:'Seu nome'},{name:'email',label:'Email',type:'email',placeholder:'seu@email.com'}].map(field => (
-              <motion.div key={field.name} variants={fadeUpVariants}>
-                <label htmlFor={field.name} className="block font-mono text-xs text-[var(--muted)] mb-1.5">// {field.label.toLowerCase()}</label>
-                <input id={field.name} name={field.name} type={field.type} required placeholder={field.placeholder} className="w-full px-4 py-3 rounded-xl border border-[var(--border)] bg-[var(--bg)] text-[var(--text)] font-body text-sm placeholder:text-[var(--muted)] focus:outline-none focus:border-accent transition-colors" />
-              </motion.div>
-            ))}
+          <motion.form onSubmit={onSubmit} noValidate variants={staggerContainerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="space-y-4" aria-label="Formulário de contato">
+            {FORM_FIELDS.map(field => {
+              const fieldError = errors[field.name]?.message
+              return (
+                <motion.div key={field.name} variants={fadeUpVariants}>
+                  <label htmlFor={field.name} className="block font-mono text-xs text-[var(--muted)] mb-1.5">// {field.label.toLowerCase()}</label>
+                  <input
+                    id={field.name}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    aria-invalid={!!fieldError}
+                    aria-describedby={fieldError ? `${field.name}-error` : undefined}
+                    {...register(field.name)}
+                    className={`w-full px-4 py-3 rounded-xl border bg-[var(--bg)] text-[var(--text)] font-body text-sm placeholder:text-[var(--muted)] focus:outline-none transition-colors ${fieldError ? 'border-red-400 focus:border-red-400' : 'border-[var(--border)] focus:border-accent'}`}
+                  />
+                  {fieldError && <p id={`${field.name}-error`} className="mt-1.5 font-mono text-xs text-red-400">{fieldError}</p>}
+                </motion.div>
+              )
+            })}
             <motion.div variants={fadeUpVariants}>
               <label htmlFor="message" className="block font-mono text-xs text-[var(--muted)] mb-1.5">// mensagem</label>
-              <textarea id="message" name="message" required rows={5} placeholder="Sua mensagem..." className="w-full px-4 py-3 rounded-xl border border-[var(--border)] bg-[var(--bg)] text-[var(--text)] font-body text-sm placeholder:text-[var(--muted)] focus:outline-none focus:border-accent transition-colors resize-none" />
+              <textarea
+                id="message"
+                rows={5}
+                placeholder="Sua mensagem..."
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? 'message-error' : undefined}
+                {...register('message')}
+                className={`w-full px-4 py-3 rounded-xl border bg-[var(--bg)] text-[var(--text)] font-body text-sm placeholder:text-[var(--muted)] focus:outline-none transition-colors resize-none ${errors.message ? 'border-red-400 focus:border-red-400' : 'border-[var(--border)] focus:border-accent'}`}
+              />
+              {errors.message && <p id="message-error" className="mt-1.5 font-mono text-xs text-red-400">{errors.message.message}</p>}
             </motion.div>
-            <motion.button type="submit" variants={fadeUpVariants} whileHover={{ scale: 1.02, y: -1 }} whileTap={{ scale: 0.98 }} aria-label="Enviar mensagem" className="w-full font-body font-semibold text-sm px-6 py-3.5 rounded-xl transition-all" style={{ backgroundColor: '#00C896', color: '#0F111A', boxShadow: '0 4px 20px rgba(0,200,150,0.3)' }}>Enviar mensagem ↗</motion.button>
+
+            {serverState.status !== 'idle' && serverState.message && (
+              <motion.p
+                variants={fadeUpVariants}
+                role="status"
+                aria-live="polite"
+                className={`font-mono text-xs ${serverState.status === 'success' ? 'text-accent' : 'text-red-400'}`}
+              >
+                {serverState.status === 'success' ? '✓ ' : '// '}{serverState.message}
+              </motion.p>
+            )}
+
+            <Button type="submit" disabled={isBusy} variants={fadeUpVariants} aria-label="Enviar mensagem" className="w-full">
+              {isSubmitting ? 'Enviando…' : 'Enviar mensagem ↗'}
+            </Button>
           </motion.form>
         </div>
       </div>
