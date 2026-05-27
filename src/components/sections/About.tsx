@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { CodeSnippet } from '@/components/ui/CodeSnippet'
+import { Logo } from '@/components/ui/Logo'
 import { useInView } from '@/hooks/useInView'
 import { fadeUpVariants, fadeRightVariants, staggerContainerVariants } from '@/utils/constants'
 
@@ -38,7 +39,7 @@ export function About() {
         <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div variants={staggerContainerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
             <motion.div variants={fadeUpVariants} className="mb-8 flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-display font-bold text-2xl text-white flex-shrink-0" style={{ background: 'linear-gradient(135deg, #00C896 0%, #0091ff 100%)', boxShadow: '0 8px 24px rgba(0,200,150,0.3)' }}>EB</div>
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-display font-bold text-2xl text-white flex-shrink-0" style={{ background: 'linear-gradient(135deg, #00C896 0%, #0091ff 100%)', boxShadow: '0 8px 24px rgba(0,200,150,0.3)' }}><Logo variant="monogram" /></div>
               <div>
                 <p className="font-display font-semibold text-[var(--text)]">Enrique Barbosa</p>
                 <p className="font-mono text-sm" style={{ color: '#00C896' }}>@enriquebds</p>
