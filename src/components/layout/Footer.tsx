@@ -1,6 +1,6 @@
 'use client'
 
-import { EMAIL } from "@/constants"
+import { EMAIL } from '@/constants'
 
 export function Footer() {
   return (

@@ -53,7 +53,11 @@ export function MemoryGameBoard() {
         >
           ↺ reiniciar
         </Button>
-        {gameState === 'idle' && <Button size="sm" onClick={startGame}>▶ começar</Button>}
+        {gameState === 'idle' && (
+          <Button size="sm" onClick={startGame}>
+            ▶ começar
+          </Button>
+        )}
         {gameState === 'preview' && (
           <span className="font-mono text-xs animate-pulse" style={{ color: '#00C896' }}>
             memorize as cartas...

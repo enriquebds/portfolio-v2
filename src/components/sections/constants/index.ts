@@ -1,4 +1,4 @@
-import { EMAIL } from "@/constants"
+import { EMAIL } from '@/constants'
 
 const CONTACT_ITEMS = [
   {
