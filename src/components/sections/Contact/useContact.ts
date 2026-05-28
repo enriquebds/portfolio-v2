@@ -25,6 +25,7 @@ export const useContact = () => {
 
   const onSubmit = handleSubmit(async data => {
     const result = await sendContactEmail(data)
+
     setServerState(result)
     if (result.status === 'success') reset()
   })
