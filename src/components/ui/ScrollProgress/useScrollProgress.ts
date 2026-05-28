@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useMotionValue, useSpring, motion } from 'framer-motion'
+import { useMotionValue, useSpring } from 'framer-motion'
 
-export function ScrollProgress() {
+export const useScrollProgress = () => {
   const [scrollPercent, setScrollPercent] = useState(0)
   const raw = useMotionValue(0)
   const smooth = useSpring(raw, { damping: 30, stiffness: 200 })
@@ -16,14 +16,10 @@ export function ScrollProgress() {
       raw.set(percent)
       setScrollPercent(percent)
     }
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [raw])
 
-  return (
-    <motion.div
-      className="fixed top-0 left-0 z-50 h-[2px] origin-left"
-      style={{ width: `${scrollPercent}%`, backgroundColor: '#00C896', scaleX: smooth }}
-    />
-  )
+  return { scrollPercent, smooth }
 }
