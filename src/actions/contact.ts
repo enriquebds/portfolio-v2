@@ -13,7 +13,10 @@ export async function sendContactEmail(input: ContactInput): Promise<ContactForm
   // nunca a fonte de verdade. O client pode ser burlado.
   const parsed = contactSchema.safeParse(input)
   if (!parsed.success) {
-    return { status: 'error', message: 'Dados inválidos. Confira os campos e tente novamente.' }
+    return {
+      status: 'error',
+      message: 'Dados inválidos. Confira os campos e tente novamente.',
+    }
   }
 
   const { name, email, message } = parsed.data

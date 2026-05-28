@@ -17,10 +17,17 @@ const DISABLED_STYLE: React.CSSProperties = {
   backgroundColor: 'var(--muted)',
   color: 'var(--card)',
   boxShadow: 'none',
-  cursor: 'default'
+  cursor: 'default',
 }
 
-export function Button({ className, type = 'button', disabled = false, style, children, ...props }: ButtonProps) {
+export function Button({
+  className,
+  type = 'button',
+  disabled = false,
+  style,
+  children,
+  ...props
+}: ButtonProps) {
   return (
     <motion.button
       type={type}

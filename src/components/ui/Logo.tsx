@@ -12,7 +12,9 @@ interface LogoProps {
   className?: string
 }
 
-const Accent = ({ children }: { children: React.ReactNode }) => <span style={{ color: ACCENT }}>{children}</span>
+const Accent = ({ children }: { children: React.ReactNode }) => (
+  <span style={{ color: ACCENT }}>{children}</span>
+)
 
 export function Logo({ variant = 'wordmark', className }: LogoProps) {
   // Monograma não carrega tipografia própria: herda cor/tamanho do container (ex: avatar com gradiente).
@@ -21,7 +23,12 @@ export function Logo({ variant = 'wordmark', className }: LogoProps) {
   }
 
   return (
-    <span className={cn('font-display font-bold text-2xl text-[var(--text)] hover:text-accent transition-colors', className)}>
+    <span
+      className={cn(
+        'font-display font-bold text-2xl text-[var(--text)] hover:text-accent transition-colors',
+        className,
+      )}
+    >
       {variant === 'tag' && <Accent>{'<'}</Accent>}
       {BRAND}
       <Accent>.</Accent>

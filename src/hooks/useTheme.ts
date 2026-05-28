@@ -24,7 +24,11 @@ export function useTheme(): UseThemeReturn {
 
   useEffect(() => {
     const root = document.documentElement
-    if (theme === 'dark') { root.classList.add('dark') } else { root.classList.remove('dark') }
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
     localStorage.setItem('theme', theme)
   }, [theme])
 

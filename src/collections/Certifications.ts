@@ -2,12 +2,17 @@ import type { CollectionConfig } from 'payload'
 
 export const Certifications: CollectionConfig = {
   slug: 'certifications',
-  admin: { useAsTitle: 'title', defaultColumns: ['title', 'issuer', 'type', 'order'] },
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'issuer', 'type', 'order'],
+  },
   fields: [
     { name: 'title', type: 'text', required: true },
     { name: 'issuer', type: 'text', required: true },
     {
-      name: 'type', type: 'select', required: true,
+      name: 'type',
+      type: 'select',
+      required: true,
       options: [
         { label: 'Certification', value: 'certification' },
         { label: 'Degree', value: 'degree' },

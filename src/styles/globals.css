@@ -1,55 +1,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-@import "tailwindcss/theme";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/theme';
+@import 'tailwindcss/utilities';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-accent: #00C896;
-  --color-amber: #F5A623;
+  --color-accent: #00c896;
+  --color-amber: #f5a623;
   --font-family-display: 'Syne', sans-serif;
   --font-family-mono: 'JetBrains Mono', monospace;
   --font-family-body: 'DM Sans', sans-serif;
 }
 
 :root {
-  --bg: #F8F7F4;
-  --text: #1A1A1A;
-  --card: #FFFFFF;
+  --bg: #f8f7f4;
+  --text: #1a1a1a;
+  --card: #ffffff;
   --border: rgba(0, 0, 0, 0.08);
   --shadow: rgba(0, 0, 0, 0.12);
-  --muted: #6B7280;
+  --muted: #6b7280;
 }
 
 .dark {
-  --bg: #0F111A;
-  --text: #E8E8E8;
-  --card: #1A1D2E;
+  --bg: #0f111a;
+  --text: #e8e8e8;
+  --card: #1a1d2e;
   --border: rgba(255, 255, 255, 0.08);
   --shadow: rgba(0, 0, 0, 0.4);
-  --muted: #9CA3AF;
+  --muted: #9ca3af;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 /* Preflight resets scoped to frontend — replaces the global Tailwind preflight
    that was removed to avoid breaking the Payload admin */
-body.frontend a { color: inherit; text-decoration: inherit; }
-body.frontend button { cursor: pointer; background-color: inherit; border: none }
-body.frontend ul, body.frontend ol { list-style: none; margin: 0; padding: 0; }
-body.frontend img, body.frontend svg, body.frontend video { display: block; }
+body.frontend a {
+  color: inherit;
+  text-decoration: inherit;
+}
+body.frontend button {
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+}
+body.frontend ul,
+body.frontend ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body.frontend img,
+body.frontend svg,
+body.frontend video {
+  display: block;
+}
 
 body.frontend {
   background-color: var(--bg);
   color: var(--text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   overflow-x: hidden;
   cursor: none;
   font-family: 'DM Sans', sans-serif;
 }
 
-@media (max-width: 768px) { body.frontend { cursor: auto; } }
+@media (max-width: 768px) {
+  body.frontend {
+    cursor: auto;
+  }
+}
 
 body.frontend::before {
   content: '';
@@ -62,16 +86,35 @@ body.frontend::before {
   background-size: 200px 200px;
 }
 
-::selection { background-color: #00C896; color: #0F111A; }
+::selection {
+  background-color: #00c896;
+  color: #0f111a;
+}
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #00C896; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #00a87e; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #00c896;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00a87e;
+}
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-
-.font-display { font-family: 'Syne', sans-serif; }
-.font-mono { font-family: 'JetBrains Mono', monospace; }
-.font-body { font-family: 'DM Sans', sans-serif; }
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+.font-body {
+  font-family: 'DM Sans', sans-serif;
+}

@@ -12,7 +12,10 @@ export interface UseInViewReturn {
   isInView: boolean
 }
 
-export function useInView({ threshold = 0.1, triggerOnce = true }: UseInViewOptions = {}): UseInViewReturn {
+export function useInView({
+  threshold = 0.1,
+  triggerOnce = true,
+}: UseInViewOptions = {}): UseInViewReturn {
   const ref = useRef<HTMLElement | null>(null)
   const [isInView, setIsInView] = useState(false)
 
@@ -28,7 +31,7 @@ export function useInView({ threshold = 0.1, triggerOnce = true }: UseInViewOpti
           setIsInView(false)
         }
       },
-      { threshold }
+      { threshold },
     )
     observer.observe(el)
     return () => observer.unobserve(el)

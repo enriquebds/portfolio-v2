@@ -15,8 +15,10 @@ export function useScrollSpy(sectionIds: string[], threshold = 0.4): UseScrollSp
       const el = document.getElementById(id)
       if (!el) return
       const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
-        { threshold, rootMargin: '-10% 0px -50% 0px' }
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id)
+        },
+        { threshold, rootMargin: '-10% 0px -50% 0px' },
       )
       observer.observe(el)
       observers.push(observer)

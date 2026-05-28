@@ -2,11 +2,16 @@ import type { CollectionConfig } from 'payload'
 
 export const Skills: CollectionConfig = {
   slug: 'skills',
-  admin: { useAsTitle: 'name', defaultColumns: ['name', 'category', 'level', 'order'] },
+  admin: {
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'category', 'level', 'order'],
+  },
   fields: [
     { name: 'name', type: 'text', required: true },
     {
-      name: 'category', type: 'select', required: true,
+      name: 'category',
+      type: 'select',
+      required: true,
       options: [
         { label: 'Frontend', value: 'frontend' },
         { label: 'Backend', value: 'backend' },
@@ -15,7 +20,9 @@ export const Skills: CollectionConfig = {
       ],
     },
     {
-      name: 'level', type: 'select', required: true,
+      name: 'level',
+      type: 'select',
+      required: true,
       options: [
         { label: 'Avançado', value: 'avancado' },
         { label: 'Intermediário', value: 'intermediario' },

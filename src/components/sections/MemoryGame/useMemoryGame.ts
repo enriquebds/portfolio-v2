@@ -4,9 +4,15 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import type { Card, GameState, UseMemoryGameReturn } from '@/types'
 
 const TECH_PAIRS = [
-  { id: 1, name: 'React' }, { id: 2, name: 'TypeScript' }, { id: 3, name: 'JavaScript' },
-  { id: 4, name: 'NodeJS' }, { id: 5, name: 'Docker' }, { id: 6, name: 'Git' },
-  { id: 7, name: 'Vite' }, { id: 8, name: 'PostgreSQL' }, { id: 9, name: 'GraphQL' },
+  { id: 1, name: 'React' },
+  { id: 2, name: 'TypeScript' },
+  { id: 3, name: 'JavaScript' },
+  { id: 4, name: 'NodeJS' },
+  { id: 5, name: 'Docker' },
+  { id: 6, name: 'Git' },
+  { id: 7, name: 'Vite' },
+  { id: 8, name: 'PostgreSQL' },
+  { id: 9, name: 'GraphQL' },
   { id: 10, name: 'NestJS' },
 ]
 
@@ -15,24 +21,48 @@ const PREVIEW_DURATION_MS = 1000
 function fisherYates<T>(array: T[]): T[] {
   const arr = [...array]
   for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]]
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
   }
   return arr
 }
 
 function createCards(): Card[] {
   const pairs = TECH_PAIRS.flatMap((tech, idx) => [
-    { id: idx * 2, pairId: tech.id, techName: tech.name, isFlipped: false, isMatched: false },
-    { id: idx * 2 + 1, pairId: tech.id, techName: tech.name, isFlipped: false, isMatched: false },
+    {
+      id: idx * 2,
+      pairId: tech.id,
+      techName: tech.name,
+      isFlipped: false,
+      isMatched: false,
+    },
+    {
+      id: idx * 2 + 1,
+      pairId: tech.id,
+      techName: tech.name,
+      isFlipped: false,
+      isMatched: false,
+    },
   ])
   return fisherYates(pairs)
 }
 
 function createUnshuffledCards(): Card[] {
   return TECH_PAIRS.flatMap((tech, idx) => [
-    { id: idx * 2, pairId: tech.id, techName: tech.name, isFlipped: false, isMatched: false },
-    { id: idx * 2 + 1, pairId: tech.id, techName: tech.name, isFlipped: false, isMatched: false },
+    {
+      id: idx * 2,
+      pairId: tech.id,
+      techName: tech.name,
+      isFlipped: false,
+      isMatched: false,
+    },
+    {
+      id: idx * 2 + 1,
+      pairId: tech.id,
+      techName: tech.name,
+      isFlipped: false,
+      isMatched: false,
+    },
   ])
 }
 
@@ -62,61 +92,75 @@ export function useMemoryGame(): UseMemoryGameReturn {
     if (gameState === 'playing') {
       timerRef.current = setInterval(() => setTime(prev => prev + 1), 1000)
     } else {
-      if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null }
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+        timerRef.current = null
+      }
     }
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
   }, [gameState])
 
-  const handleCardClick = useCallback((id: number) => {
-    if (gameState !== 'playing') return
-    if (isChecking.current) return
-    if (flippedIds.current.length >= 2) return
-    setCards(prev => {
-      const card = prev.find(c => c.id === id)
-      if (!card || card.isFlipped || card.isMatched) return prev
-      return prev.map(c => c.id === id ? { ...c, isFlipped: true } : c)
-    })
-    if (flippedIds.current.includes(id)) return
-    flippedIds.current = [...flippedIds.current, id]
-    if (flippedIds.current.length === 2) {
-      isChecking.current = true
-      setAttempts(a => a + 1)
-      const [firstId, secondId] = flippedIds.current
+  const handleCardClick = useCallback(
+    (id: number) => {
+      if (gameState !== 'playing') return
+      if (isChecking.current) return
+      if (flippedIds.current.length >= 2) return
       setCards(prev => {
-        const first = prev.find(c => c.id === firstId)
-        const second = prev.find(c => c.id === secondId)
-        if (first && second && first.pairId === second.pairId) {
-          flippedIds.current = []
-          isChecking.current = false
-          const newCards = prev.map(c =>
-            c.id === firstId || c.id === secondId ? { ...c, isFlipped: true, isMatched: true } : c
-          )
-          if (newCards.every(c => c.isMatched)) {
-            setGameState('won')
-            setAttempts(prevAttempts => {
-              setBestScore(bs => {
-                const newBest = bs === null || prevAttempts < bs ? prevAttempts : bs
-                if (typeof window !== 'undefined') localStorage.setItem('memoryBestScore', String(newBest))
-                return newBest
-              })
-              return prevAttempts
-            })
-          }
-          return newCards
-        } else {
-          setTimeout(() => {
-            setCards(c => c.map(card =>
-              (card.id === firstId || card.id === secondId) && !card.isMatched
-                ? { ...card, isFlipped: false } : card
-            ))
+        const card = prev.find(c => c.id === id)
+        if (!card || card.isFlipped || card.isMatched) return prev
+        return prev.map(c => (c.id === id ? { ...c, isFlipped: true } : c))
+      })
+      if (flippedIds.current.includes(id)) return
+      flippedIds.current = [...flippedIds.current, id]
+      if (flippedIds.current.length === 2) {
+        isChecking.current = true
+        setAttempts(a => a + 1)
+        const [firstId, secondId] = flippedIds.current
+        setCards(prev => {
+          const first = prev.find(c => c.id === firstId)
+          const second = prev.find(c => c.id === secondId)
+          if (first && second && first.pairId === second.pairId) {
             flippedIds.current = []
             isChecking.current = false
-          }, 800)
-          return prev
-        }
-      })
-    }
-  }, [gameState])
+            const newCards = prev.map(c =>
+              c.id === firstId || c.id === secondId
+                ? { ...c, isFlipped: true, isMatched: true }
+                : c,
+            )
+            if (newCards.every(c => c.isMatched)) {
+              setGameState('won')
+              setAttempts(prevAttempts => {
+                setBestScore(bs => {
+                  const newBest = bs === null || prevAttempts < bs ? prevAttempts : bs
+                  if (typeof window !== 'undefined')
+                    localStorage.setItem('memoryBestScore', String(newBest))
+                  return newBest
+                })
+                return prevAttempts
+              })
+            }
+            return newCards
+          } else {
+            setTimeout(() => {
+              setCards(c =>
+                c.map(card =>
+                  (card.id === firstId || card.id === secondId) && !card.isMatched
+                    ? { ...card, isFlipped: false }
+                    : card,
+                ),
+              )
+              flippedIds.current = []
+              isChecking.current = false
+            }, 800)
+            return prev
+          }
+        })
+      }
+    },
+    [gameState],
+  )
 
   const startGame = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current)
@@ -145,5 +189,14 @@ export function useMemoryGame(): UseMemoryGameReturn {
     setGameState('idle')
   }, [])
 
-  return { cards, attempts, time, gameState, handleCardClick, startGame, resetGame, bestScore }
+  return {
+    cards,
+    attempts,
+    time,
+    gameState,
+    handleCardClick,
+    startGame,
+    resetGame,
+    bestScore,
+  }
 }

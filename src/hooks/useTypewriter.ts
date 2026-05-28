@@ -14,7 +14,12 @@ export interface UseTypewriterReturn {
   isTyping: boolean
 }
 
-export function useTypewriter({ strings, typingSpeed = 80, deletingSpeed = 40, pauseDuration = 2000 }: UseTypewriterOptions): UseTypewriterReturn {
+export function useTypewriter({
+  strings,
+  typingSpeed = 80,
+  deletingSpeed = 40,
+  pauseDuration = 2000,
+}: UseTypewriterOptions): UseTypewriterReturn {
   const [displayText, setDisplayText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -50,7 +55,9 @@ export function useTypewriter({ strings, typingSpeed = 80, deletingSpeed = 40, p
       }
     }
     timeoutRef.current = setTimeout(tick, isDeleting ? deletingSpeed : typingSpeed)
-    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current) }
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
   }, [charIndex, isDeleting, currentIndex, strings, typingSpeed, deletingSpeed, pauseDuration])
 
   return { displayText, isTyping }
