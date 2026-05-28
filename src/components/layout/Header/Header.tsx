@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { Button } from '@/components/ui/Button'
 import { Logo } from '@/components/ui/Logo'
 import { cn } from '@/utils/cn'
 import { navLinks } from '@/utils/constants'
@@ -83,11 +84,12 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-          <button
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg"
+          <Button
+            variant="icon"
             onClick={() => setMobileOpen(prev => !prev)}
             aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
             aria-expanded={mobileOpen}
+            className="md:hidden"
           >
             <div className="w-5 flex flex-col gap-1">
               <motion.span
@@ -106,7 +108,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
                 className="block h-[2px] bg-[var(--text)] rounded-full"
               />
             </div>
-          </button>
+          </Button>
         </div>
       </div>
       <AnimatePresence>

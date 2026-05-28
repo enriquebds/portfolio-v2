@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { CodeSnippet } from '@/components/ui/CodeSnippet'
+import { ButtonLink } from '@/components/ui/Button'
 import { useTypewriter } from '@/hooks/useTypewriter'
 import { fadeUpVariants, staggerContainerVariants } from '@/utils/constants'
 
@@ -104,37 +105,27 @@ export function Hero() {
               </span>
             </motion.div>
             <motion.div variants={fadeUpVariants} className="mt-8 flex flex-wrap gap-3">
-              <motion.a
+              <ButtonLink
                 href="#projects"
                 onClick={e => {
                   e.preventDefault()
                   document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                whileHover={{ scale: 1.03, y: -1 }}
-                whileTap={{ scale: 0.97 }}
                 aria-label="Ver projetos"
-                className="font-body font-semibold text-sm px-6 py-3 rounded-lg transition-all"
-                style={{
-                  backgroundColor: '#00C896',
-                  color: '#0F111A',
-                  boxShadow: '0 4px 20px rgba(0,200,150,0.3)',
-                }}
               >
                 Ver projetos
-              </motion.a>
-              <motion.a
+              </ButtonLink>
+              <ButtonLink
                 href="#contact"
+                variant="secondary"
                 onClick={e => {
                   e.preventDefault()
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                whileHover={{ scale: 1.03, y: -1 }}
-                whileTap={{ scale: 0.97 }}
                 aria-label="Entrar em contato"
-                className="font-body font-medium text-sm px-6 py-3 rounded-lg border border-[var(--border)] text-[var(--text)] hover:border-accent transition-all"
               >
                 Entrar em contato
-              </motion.a>
+              </ButtonLink>
             </motion.div>
             <motion.div variants={fadeUpVariants} className="mt-8 flex flex-wrap gap-2">
               {['React', 'TypeScript', 'Node.js', 'B2B SaaS', 'AIoT'].map(tag => (

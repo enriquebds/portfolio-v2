@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import { Button } from '@/components/ui/Button'
 
 interface ThemeToggleProps {
   theme: 'light' | 'dark'
@@ -9,10 +10,11 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
   return (
-    <button
+    <Button
+      variant="icon"
       onClick={onToggle}
       aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}
-      className="relative w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-black/5 dark:hover:bg-white/10"
+      className="relative"
     >
       <AnimatePresence mode="wait" initial={false}>
         {theme === 'dark' ? (
@@ -59,12 +61,11 @@ export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
             exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.25 }}
-            className="text-[var(--text)]"
           >
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </motion.svg>
         )}
       </AnimatePresence>
-    </button>
+    </Button>
   )
 }
