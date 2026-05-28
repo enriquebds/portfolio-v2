@@ -1,5 +1,6 @@
 'use server'
 
+import { EMAIL } from '@/constants'
 import { resend } from '@/services/resend'
 import { contactSchema, type ContactInput } from '@/validations/contact'
 
@@ -24,12 +25,12 @@ export async function sendContactEmail(input: ContactInput): Promise<ContactForm
   try {
     const { error } = await resend.emails.send({
       from: process.env.CONTACT_FROM_EMAIL ?? 'Portfólio <onboarding@resend.dev>',
-      to: process.env.CONTACT_TO_EMAIL ?? 'enrique.barbosasilva@gmail.com',
+      to: process.env.CONTACT_TO_EMAIL ?? EMAIL,
       replyTo: email,
       subject: `Contato via portfólio — ${name}`,
       text: `Nome: ${name}\nEmail: ${email}\n\n${message}`,
     })
-
+    
     if (error) {
       return {
         status: 'error',

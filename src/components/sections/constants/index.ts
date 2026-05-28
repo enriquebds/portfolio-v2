@@ -1,10 +1,12 @@
+import { EMAIL } from "@/constants"
+
 const CONTACT_ITEMS = [
   {
     label: 'Email',
-    value: 'enrique.barbosasilva@gmail.com',
-    href: 'mailto:enrique.barbosasilva@gmail.com',
+    value: EMAIL,
+    href: `mailto:${EMAIL}`,
     icon: '✉',
-    display: 'enrique.barbosasilva@gmail.com',
+    display: EMAIL,
   },
   {
     label: 'LinkedIn',

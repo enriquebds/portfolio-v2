@@ -1,5 +1,7 @@
 'use client'
 
+import { EMAIL } from "@/constants"
+
 export function Footer() {
   return (
     <footer className="border-t border-[var(--border)] py-8">
@@ -29,7 +31,7 @@ export function Footer() {
             linkedin
           </a>
           <a
-            href="mailto:enrique.barbosasilva@gmail.com"
+            href={`mailto:${EMAIL}`}
             aria-label="Email"
             className="font-mono text-xs text-[var(--muted)] hover:text-accent transition-colors"
           >
