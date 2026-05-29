@@ -3,17 +3,14 @@
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { Button } from '@/components/ui/Button'
 import { Logo } from '@/components/ui/Logo'
+import { useTheme } from '@/components/providers/ThemeProvider'
 import { cn } from '@/utils/cn'
 import { navLinks } from '@/utils/constants'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useHeader } from './useHeader'
 
-interface HeaderProps {
-  theme: 'light' | 'dark'
-  onToggleTheme: () => void
-}
-
-export function Header({ theme, onToggleTheme }: HeaderProps) {
+export function Header() {
+  const { theme } = useTheme()
   const { scrolled, mobileOpen, activeSection, handleNavClick, setMobileOpen } = useHeader()
 
   return (
@@ -83,7 +80,7 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
           })}
         </nav>
         <div className="flex items-center gap-2">
-          <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          <ThemeToggle />
           <Button
             variant="icon"
             onClick={() => setMobileOpen(prev => !prev)}

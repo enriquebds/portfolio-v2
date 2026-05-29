@@ -2,17 +2,15 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
+import { useTheme } from '@/components/providers/ThemeProvider'
 
-interface ThemeToggleProps {
-  theme: 'light' | 'dark'
-  onToggle: () => void
-}
+export function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme()
 
-export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
   return (
     <Button
       variant="icon"
-      onClick={onToggle}
+      onClick={toggleTheme}
       aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}
       className="relative"
     >
