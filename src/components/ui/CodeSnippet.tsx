@@ -133,8 +133,14 @@ export function CodeSnippet({
   if (floating) {
     return (
       <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        animate={{ y: -12 }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          repeatType: 'mirror',
+          ease: [0.45, 0, 0.55, 1],
+        }}
+        style={{ willChange: 'transform' }}
       >
         {content}
       </motion.div>
