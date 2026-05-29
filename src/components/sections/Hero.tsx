@@ -70,7 +70,7 @@ export function Hero() {
               <p className="font-mono text-base text-[var(--muted)] mb-2">Olá, sou</p>
               <h1
                 id="hero-heading"
-                className="font-display text-6xl md:text-7xl xl:text-8xl font-extrabold leading-none text-[var(--text)]"
+                className="font-display text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-extrabold leading-none text-[var(--text)]"
               >
                 Enrique
                 <br />
