@@ -7,9 +7,12 @@ import { useTheme } from '@/components/providers/ThemeProvider'
 import { cn } from '@/utils/cn'
 import { navLinks } from '@/utils/constants'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import { useHeader } from './useHeader'
 
 export function Header() {
+  const t = useTranslations('header')
+  const tNav = useTranslations('nav')
   const { theme } = useTheme()
   const { scrolled, mobileOpen, activeSection, handleNavClick, setMobileOpen } = useHeader()
 
@@ -34,7 +37,7 @@ export function Header() {
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 font-mono text-sm px-3 py-2 rounded-lg z-50"
         style={{ backgroundColor: '#00C896', color: '#0F111A' }}
       >
-        Ir para conteúdo principal
+        {t('skipLink')}
       </a>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <motion.a
@@ -48,7 +51,7 @@ export function Header() {
         >
           <Logo />
         </motion.a>
-        <nav className="hidden md:flex items-center gap-1" aria-label="Navegação principal">
+        <nav className="hidden md:flex items-center gap-1" aria-label={t('navLabel')}>
           {navLinks.map(link => {
             const id = link.href.replace('#', '')
             const isActive = activeSection === id
@@ -67,7 +70,7 @@ export function Header() {
                 )}
                 whileHover={{ y: -1 }}
               >
-                {link.label}
+                {tNav(link.key as Parameters<typeof tNav>[0])}
                 {isActive && (
                   <motion.div
                     layoutId="nav-indicator"
@@ -84,7 +87,7 @@ export function Header() {
           <Button
             variant="icon"
             onClick={() => setMobileOpen(prev => !prev)}
-            aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-label={mobileOpen ? t('closeMenu') : t('openMenu')}
             aria-expanded={mobileOpen}
             className="md:hidden"
           >
@@ -121,7 +124,7 @@ export function Header() {
               backdropFilter: 'blur(12px)',
             }}
           >
-            <nav className="flex flex-col px-6 py-4 gap-1" aria-label="Menu mobile">
+            <nav className="flex flex-col px-6 py-4 gap-1" aria-label={t('mobileNavLabel')}>
               {navLinks.map((link, i) => {
                 const isActive = activeSection === link.href.replace('#', '')
                 return (
@@ -144,7 +147,7 @@ export function Header() {
                     )}
                   >
                     {isActive && <span className="w-1 h-1 rounded-full bg-accent flex-shrink-0" />}
-                    {link.label}
+                    {tNav(link.key as Parameters<typeof tNav>[0])}
                   </motion.a>
                 )
               })}

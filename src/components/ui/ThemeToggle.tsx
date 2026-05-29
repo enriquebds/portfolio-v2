@@ -3,15 +3,17 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { useTheme } from '@/components/providers/ThemeProvider'
+import { useTranslations } from 'next-intl'
 
 export function ThemeToggle() {
+  const t = useTranslations('themeToggle')
   const { theme, toggleTheme } = useTheme()
 
   return (
     <Button
       variant="icon"
       onClick={toggleTheme}
-      aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}
+      aria-label={theme === 'dark' ? t('lightMode') : t('darkMode')}
       className="relative"
     >
       <AnimatePresence mode="wait" initial={false}>
