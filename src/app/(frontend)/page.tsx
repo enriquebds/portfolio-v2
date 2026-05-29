@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 
 import { getPayload } from 'payload'
 import config from '../../../payload.config'
+import { getLocale } from 'next-intl/server'
 import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
 import { Experience } from '@/components/sections/Experience/Experience'
@@ -12,19 +13,21 @@ import { Certifications } from '@/components/sections/Certifications/Certificati
 import { Contact } from '@/components/sections/Contact/Contact'
 import type { ExperienceItem, ProjectItem, CertificationItem, SkillItem } from '@/types'
 
-async function getData() {
+async function getData(locale: string) {
   try {
     const payload = await getPayload({ config })
 
     const [experienceRes, projectsRes, certsRes, skillsRes] = await Promise.all([
-      payload.find({ collection: 'experience', sort: 'order', limit: 20 }),
-      payload.find({ collection: 'projects', sort: 'order', limit: 20 }),
+      payload.find({ collection: 'experience', sort: 'order', limit: 20, locale: locale as 'pt-BR' | 'en-US', fallbackLocale: 'pt-BR' }),
+      payload.find({ collection: 'projects', sort: 'order', limit: 20, locale: locale as 'pt-BR' | 'en-US', fallbackLocale: 'pt-BR' }),
       payload.find({
         collection: 'certifications',
         sort: 'order',
         limit: 20,
+        locale: locale as 'pt-BR' | 'en-US',
+        fallbackLocale: 'pt-BR',
       }),
-      payload.find({ collection: 'skills', sort: 'order', limit: 50 }),
+      payload.find({ collection: 'skills', sort: 'order', limit: 50, locale: locale as 'pt-BR' | 'en-US', fallbackLocale: 'pt-BR' }),
     ])
 
     const experiences: ExperienceItem[] = experienceRes.docs.map(doc => ({
@@ -84,7 +87,8 @@ async function getData() {
 }
 
 export default async function HomePage() {
-  const { experiences, projects, certifications, skills } = await getData()
+  const locale = await getLocale()
+  const { experiences, projects, certifications, skills } = await getData(locale)
 
   return (
     <>
