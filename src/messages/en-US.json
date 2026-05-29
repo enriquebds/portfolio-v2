@@ -1,1 +1,116 @@
-{}
+{
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "game": "Game",
+    "certifications": "Education",
+    "contact": "Contact"
+  },
+  "header": {
+    "skipLink": "Skip to main content",
+    "navLabel": "Main navigation",
+    "mobileNavLabel": "Mobile menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "themeToggle": {
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "location": "São Paulo, Brazil · Hybrid or Remote",
+    "availability": "Available full-time/freelance",
+    "ctaProjects": "See projects",
+    "ctaContact": "Get in touch",
+    "scroll": "scroll"
+  },
+  "about": {
+    "title": "About me",
+    "accent": "// about",
+    "subtitle": "Front-end developer passionate about creating high-quality digital experiences.",
+    "paragraph1": "I'm a front-end developer with <strong>over 3 years of experience</strong> building fast, accessible, and scalable interfaces. I primarily work in the React + TypeScript ecosystem, focusing on <strong>B2B SaaS</strong>, AIoT, and smart cities solutions.",
+    "paragraph2": "At Group Link One, I contribute to building real-time monitoring platforms for smart cities, integrating IoT devices with modern dashboards and interactive maps.",
+    "paragraph3": "Beyond code, I'm interested in frontend architecture, developer experience, and building a culture of quality within the team.",
+    "availabilityComment": "// availability",
+    "availabilityText": "Open to <strong>full-time or freelance</strong> opportunities · Hybrid or Remote",
+    "stats": {
+      "experience": "years of experience",
+      "specialty": "specialty",
+      "hooks": "custom hooks",
+      "platforms": "production platforms"
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "accent": "// experience",
+    "subtitle": "My professional journey building high-impact digital products.",
+    "current": "current"
+  },
+  "projects": {
+    "title": "Projects",
+    "accent": "// projects",
+    "subtitle": "Selected work — platforms, tools, and experiments.",
+    "published": "published",
+    "comingSoon": "coming soon",
+    "code": "code",
+    "comingSoonCode": "// coming soon",
+    "codeUnavailable": "code unavailable",
+    "ariaProject": "Project: {title}",
+    "ariaCode": "View code for {title}",
+    "ariaDemo": "Demo: {title}"
+  },
+  "skills": {
+    "title": "Stack",
+    "accent": "// skills",
+    "subtitle": "Technologies and tools I use daily.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "Tools & DevOps",
+      "softskills": "Soft Skills"
+    }
+  },
+  "certifications": {
+    "title": "Education",
+    "accent": "// education",
+    "subtitle": "Certifications and academic background.",
+    "certsHeading": "// certifications",
+    "degreesHeading": "// academic background",
+    "ariaCredential": "View credential: {title}"
+  },
+  "game": {
+    "accent": "// break time",
+    "description": "Every dev deserves a break. Test your memory by matching tech pairs — if you miss some stacks, don't worry, it happens to the best of us.",
+    "attempts": "attempts",
+    "time": "time",
+    "best": "best",
+    "restart": "↺ restart",
+    "start": "▶ start",
+    "memorize": "memorize the cards...",
+    "wonTitle": "🎉 You won!",
+    "wonStats": "{attempts} attempts · {time}",
+    "playAgain": "Play again"
+  },
+  "contact": {
+    "title": "Contact",
+    "accent": "// contact",
+    "subtitle": "Open to full-time or freelance opportunities · Hybrid or Remote. Let's talk?",
+    "availabilityComment": "// availability",
+    "availabilityText": "Open to <strong>full-time or freelance</strong> opportunities — Hybrid or Remote · São Paulo, SP",
+    "formLabel": "Contact form",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "message",
+    "messagePlaceholder": "Your message...",
+    "submit": "Send message ↗",
+    "submitting": "Sending…"
+  },
+  "footer": {
+    "builtWith": "built with"
+  }
+}
