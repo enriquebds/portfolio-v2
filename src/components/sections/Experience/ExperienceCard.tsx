@@ -76,7 +76,7 @@ export function ExperienceCard({ exp, index }: ExperienceCardProps) {
           </ul>
         )}
         {exp.stack.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 mt-5">
             {exp.stack.map(tech => (
               <span
                 key={tech}
