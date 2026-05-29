@@ -1,6 +1,7 @@
 'use client'
 
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { LocaleSwitcher } from '@/components/layout/LocaleSwitcher/LocaleSwitcher'
 import { Button } from '@/components/ui/Button'
 import { Logo } from '@/components/ui/Logo'
 import { useTheme } from '@/components/providers/ThemeProvider'
@@ -84,6 +85,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <LocaleSwitcher />
           <Button
             variant="icon"
             onClick={() => setMobileOpen(prev => !prev)}
