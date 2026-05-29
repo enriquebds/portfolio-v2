@@ -20,7 +20,7 @@ export function LocaleSwitcher() {
         aria-label="Mudar idioma"
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className="flex items-center gap-1.5 px-2"
+        className="flex items-center gap-1.5 px-2 w-20"
       >
         <span aria-hidden="true">{current.flag}</span>
         <span className="font-mono text-xs hidden sm:block">{current.short}</span>
