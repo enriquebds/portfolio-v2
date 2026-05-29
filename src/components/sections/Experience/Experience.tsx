@@ -6,8 +6,10 @@ import { staggerContainerVariants } from '@/utils/constants'
 import type { ExperienceItem } from '@/types'
 import { ExperienceCard } from './ExperienceCard'
 import { useExperience } from './useExperience'
+import { useTranslations } from 'next-intl'
 
 export function Experience({ experiences }: { experiences: ExperienceItem[] }) {
+  const t = useTranslations('experience')
   const { ref, isInView } = useExperience()
 
   return (
@@ -15,9 +17,9 @@ export function Experience({ experiences }: { experiences: ExperienceItem[] }) {
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle
           id="experience-heading"
-          title="Experiência"
-          accent="// experience"
-          subtitle="Minha trajetória profissional construindo produtos digitais de alto impacto."
+          title={t('title')}
+          accent={t('accent')}
+          subtitle={t('subtitle')}
         />
         <div ref={ref as React.RefObject<HTMLDivElement>} className="relative">
           <motion.div

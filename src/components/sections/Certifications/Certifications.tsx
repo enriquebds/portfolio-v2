@@ -5,8 +5,10 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { cardVariants, staggerContainerVariants } from '@/utils/constants'
 import type { CertificationItem } from '@/types'
 import { useCertifications } from './useCertifications'
+import { useTranslations } from 'next-intl'
 
 export function Certifications({ certifications }: { certifications: CertificationItem[] }) {
+  const t = useTranslations('certifications')
   const { ref, isInView, certs, degrees } = useCertifications(certifications)
 
   return (
@@ -18,9 +20,9 @@ export function Certifications({ certifications }: { certifications: Certificati
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle
           id="certifications-heading"
-          title="Formação"
-          accent="// education"
-          subtitle="Certificações e formação acadêmica."
+          title={t('title')}
+          accent={t('accent')}
+          subtitle={t('subtitle')}
         />
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
@@ -34,7 +36,7 @@ export function Certifications({ certifications }: { certifications: Certificati
               className="font-mono text-sm mb-6"
               style={{ color: '#00C896' }}
             >
-              // certificações
+              {t('certsHeading')}
             </motion.h3>
             <motion.div
               variants={staggerContainerVariants}
@@ -70,7 +72,7 @@ export function Certifications({ certifications }: { certifications: Certificati
                           href={cert.credentialUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`Ver credencial: ${cert.title}`}
+                          aria-label={t('ariaCredential', { title: cert.title })}
                           className="font-mono text-[10px] hover:underline"
                           style={{ color: '#00C896' }}
                         >
@@ -91,7 +93,7 @@ export function Certifications({ certifications }: { certifications: Certificati
               className="font-mono text-sm mb-6"
               style={{ color: '#00C896' }}
             >
-              // formação acadêmica
+              {t('degreesHeading')}
             </motion.h3>
             <motion.div
               variants={staggerContainerVariants}

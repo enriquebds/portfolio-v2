@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 import { MemoryGameBoard } from '@/components/sections/MemoryGame/MemoryGameBoard'
 import { fadeUpVariants, staggerContainerVariants } from '@/utils/constants'
 import { useInView } from '@/hooks/useInView'
+import { useTranslations } from 'next-intl'
 
 export function MemoryGame() {
+  const t = useTranslations('game')
   const { ref, isInView } = useInView({ threshold: 0.1 })
   return (
     <section id="game" aria-labelledby="game-heading" className="py-24 md:py-32 bg-(--card)">
@@ -22,7 +24,7 @@ export function MemoryGame() {
             className="font-mono text-sm block mb-2"
             style={{ color: '#00C896' }}
           >
-            // break time
+            {t('accent')}
           </motion.span>
           <motion.h2
             id="game-heading"
@@ -35,8 +37,7 @@ export function MemoryGame() {
             variants={fadeUpVariants}
             className="font-body text-[var(--muted)] max-w-xl mx-auto mt-4"
           >
-            Todo dev merece uma pausa. Teste a memória combinando os pares de tecnologias — se você
-            errar as stacks, não se preocupe, acontece com o melhor de nós.
+            {t('description')}
           </motion.p>
         </motion.div>
         <motion.div

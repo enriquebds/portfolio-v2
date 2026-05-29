@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { fadeUpVariants } from '@/utils/constants'
 import type { ExperienceItem } from '@/types'
 import { useExperienceCard } from './useExperienceCard'
+import { useTranslations } from 'next-intl'
 
 interface ExperienceCardProps {
   exp: ExperienceItem
@@ -11,6 +12,7 @@ interface ExperienceCardProps {
 }
 
 export function ExperienceCard({ exp, index }: ExperienceCardProps) {
+  const t = useTranslations('experience')
   const { ref, isInView, formattedStart, formattedEnd } = useExperienceCard(exp)
 
   return (
@@ -58,7 +60,7 @@ export function ExperienceCard({ exp, index }: ExperienceCardProps) {
                   className="w-1.5 h-1.5 rounded-full animate-pulse"
                   style={{ backgroundColor: '#00C896' }}
                 />
-                atual
+                {t('current')}
               </span>
             )}
           </div>

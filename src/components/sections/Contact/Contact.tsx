@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/Button'
 import { staggerContainerVariants, fadeUpVariants } from '@/utils/constants'
 import { CONTACT_ITEMS, FORM_FIELDS } from '../constants'
 import { useContact } from './useContact'
+import { useTranslations } from 'next-intl'
 
 export function Contact() {
+  const t = useTranslations('contact')
   const { ref, isInView, register, errors, isSubmitting, isBusy, onSubmit, serverState } =
     useContact()
 
@@ -20,9 +22,9 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle
           id="contact-heading"
-          title="Contato"
-          accent="// contact"
-          subtitle="Aberto a oportunidades CLT ou PJ · Híbrido ou Remoto. Vamos conversar?"
+          title={t('title')}
+          accent={t('accent')}
+          subtitle={t('subtitle')}
         />
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
@@ -67,11 +69,12 @@ export function Contact() {
               }}
             >
               <p className="font-mono text-xs mb-1" style={{ color: '#00C896' }}>
-                // disponibilidade
+                {t('availabilityComment')}
               </p>
               <p className="font-body text-sm text-[var(--text)]">
-                Aberto a oportunidades <strong>CLT ou PJ</strong> — Híbrido ou Remoto · São Paulo,
-                SP
+                {t.rich('availabilityText', {
+                  strong: chunks => <strong>{chunks}</strong>,
+                })}
               </p>
             </motion.div>
           </motion.div>
@@ -82,7 +85,7 @@ export function Contact() {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             className="space-y-4"
-            aria-label="Formulário de contato"
+            aria-label={t('formLabel')}
           >
             {FORM_FIELDS.map(field => {
               const fieldError = errors[field.name]?.message
@@ -92,12 +95,12 @@ export function Contact() {
                     htmlFor={field.name}
                     className="block font-mono text-xs text-[var(--muted)] mb-1.5"
                   >
-                    // {field.label.toLowerCase()}
+                    // {t(`${field.name}Label`).toLowerCase()}
                   </label>
                   <input
                     id={field.name}
                     type={field.type}
-                    placeholder={field.placeholder}
+                    placeholder={t(`${field.name}Placeholder`)}
                     aria-invalid={!!fieldError}
                     aria-describedby={fieldError ? `${field.name}-error` : undefined}
                     {...register(field.name)}
@@ -116,12 +119,12 @@ export function Contact() {
                 htmlFor="message"
                 className="block font-mono text-xs text-[var(--muted)] mb-1.5"
               >
-                // mensagem
+                // {t('messageLabel')}
               </label>
               <textarea
                 id="message"
                 rows={5}
-                placeholder="Sua mensagem..."
+                placeholder={t('messagePlaceholder')}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? 'message-error' : undefined}
                 {...register('message')}
@@ -150,10 +153,10 @@ export function Contact() {
               type="submit"
               disabled={isBusy}
               variants={fadeUpVariants}
-              aria-label="Enviar mensagem"
+              aria-label={t('submit')}
               className="w-full"
             >
-              {isSubmitting ? 'Enviando…' : 'Enviar mensagem ↗'}
+              {isSubmitting ? t('submitting') : t('submit')}
             </Button>
           </motion.form>
         </div>

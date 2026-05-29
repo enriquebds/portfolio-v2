@@ -6,6 +6,7 @@ import { CodeSnippet } from '@/components/ui/CodeSnippet'
 import { Logo } from '@/components/ui/Logo'
 import { useInView } from '@/hooks/useInView'
 import { fadeUpVariants, fadeRightVariants, staggerContainerVariants } from '@/utils/constants'
+import { useTranslations } from 'next-intl'
 
 const ABOUT_CODE = `function deepClone<T>(obj: T): T {
   if (obj === null || typeof obj !== 'object') {
@@ -24,22 +25,23 @@ const ABOUT_CODE = `function deepClone<T>(obj: T): T {
 export { deepClone }`
 
 const stats = [
-  { value: '3+', label: 'anos de experiência', icon: '🗓' },
-  { value: 'B2B SaaS', label: 'especialidade', icon: '🚀' },
-  { value: '20+', label: 'custom hooks', icon: '⚙️' },
-  { value: '3', label: 'plataformas produção', icon: '🏗' },
+  { value: '3+', key: 'experience', icon: '🗓' },
+  { value: 'B2B SaaS', key: 'specialty', icon: '🚀' },
+  { value: '20+', key: 'hooks', icon: '⚙️' },
+  { value: '3', key: 'platforms', icon: '🏗' },
 ]
 
 export function About() {
+  const t = useTranslations('about')
   const { ref, isInView } = useInView({ threshold: 0.15 })
   return (
     <section id="about" aria-labelledby="about-heading" className="py-24 md:py-32 relative">
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle
           id="about-heading"
-          title="Sobre mim"
-          accent="// about"
-          subtitle="Desenvolvedor front-end apaixonado por criar experiências digitais de alta qualidade."
+          title={t('title')}
+          accent={t('accent')}
+          subtitle={t('subtitle')}
         />
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
@@ -71,31 +73,28 @@ export function About() {
               variants={fadeUpVariants}
               className="font-body text-[var(--muted)] leading-relaxed text-base mb-4"
             >
-              Sou um desenvolvedor front-end com{' '}
-              <strong className="text-[var(--text)]">mais de 3 anos de experiência</strong>{' '}
-              construindo interfaces rápidas, acessíveis e escaláveis. Atuo principalmente no
-              ecossistema React + TypeScript, com foco em soluções{' '}
-              <strong className="text-[var(--text)]">B2B SaaS</strong>, AIoT e smart cities.
+              {t.rich('paragraph1', {
+                strong: chunks => (
+                  <strong className="text-[var(--text)]">{chunks}</strong>
+                ),
+              })}
             </motion.p>
             <motion.p
               variants={fadeUpVariants}
               className="font-body text-[var(--muted)] leading-relaxed text-base mb-4"
             >
-              Na Group Link One, contribuo para o desenvolvimento de plataformas de monitoramento em
-              tempo real para cidades inteligentes, integrando dispositivos IoT com dashboards
-              modernos e mapas interativos.
+              {t('paragraph2')}
             </motion.p>
             <motion.p
               variants={fadeUpVariants}
               className="font-body text-[var(--muted)] leading-relaxed text-base mb-8"
             >
-              Além do código, me interessa arquitetura frontend, developer experience e criar uma
-              cultura de qualidade no time.
+              {t('paragraph3')}
             </motion.p>
             <motion.div variants={staggerContainerVariants} className="grid grid-cols-2 gap-3">
               {stats.map(stat => (
                 <motion.div
-                  key={stat.value}
+                  key={stat.key}
                   variants={fadeUpVariants}
                   className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)]"
                   whileHover={{ y: -2, borderColor: '#00C896' }}
@@ -103,7 +102,7 @@ export function About() {
                 >
                   <div className="text-2xl mb-1">{stat.icon}</div>
                   <p className="font-display font-bold text-xl text-[var(--text)]">{stat.value}</p>
-                  <p className="font-body text-xs text-[var(--muted)]">{stat.label}</p>
+                  <p className="font-body text-xs text-[var(--muted)]">{t(`stats.${stat.key}`)}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -122,14 +121,16 @@ export function About() {
               transition={{ delay: 0.4 }}
               className="mt-6 p-4 rounded-xl border border-[var(--border)] bg-[var(--card)]"
             >
-              <p className="font-mono text-xs text-[var(--muted)] mb-2">// disponibilidade</p>
+              <p className="font-mono text-xs text-[var(--muted)] mb-2">{t('availabilityComment')}</p>
               <div className="flex items-center gap-2">
                 <span
                   className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
                   style={{ backgroundColor: '#00C896' }}
                 />
                 <span className="font-body text-sm text-[var(--text)]">
-                  Aberto a oportunidades <strong>CLT ou PJ</strong> · Híbrido ou Remoto
+                  {t.rich('availabilityText', {
+                    strong: chunks => <strong>{chunks}</strong>,
+                  })}
                 </span>
               </div>
             </motion.div>

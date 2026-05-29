@@ -5,6 +5,7 @@ import { CodeSnippet } from '@/components/ui/CodeSnippet'
 import { ButtonLink } from '@/components/ui/Button'
 import { useTypewriter } from '@/hooks/useTypewriter'
 import { fadeUpVariants, staggerContainerVariants } from '@/utils/constants'
+import { useTranslations } from 'next-intl'
 
 const ROLES = [
   'Front-end Engineer',
@@ -33,6 +34,7 @@ function useDebounce<T>(value: T, delay: number): T {
 export default useDebounce`
 
 export function Hero() {
+  const t = useTranslations('hero')
   const { displayText, isTyping } = useTypewriter({ strings: ROLES })
 
   return (
@@ -67,7 +69,7 @@ export function Hero() {
               $ whoami
             </motion.span>
             <motion.div variants={fadeUpVariants}>
-              <p className="font-mono text-base text-[var(--muted)] mb-2">Olá, sou</p>
+              <p className="font-mono text-base text-[var(--muted)] mb-2">{t('greeting')}</p>
               <h1
                 id="hero-heading"
                 className="font-display text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-extrabold leading-none text-[var(--text)]"
@@ -94,13 +96,13 @@ export function Hero() {
                 className="inline-flex items-center gap-2 font-mono text-sm px-3 py-1.5 rounded-full border"
                 style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}
               >
-                <span>📍</span> São Paulo, Brasil · Híbrido ou Remoto
+                <span>📍</span> {t('location')}
                 <span
                   className="w-1.5 h-1.5 rounded-full animate-pulse"
                   style={{ backgroundColor: '#00C896' }}
                 />
                 <span className="text-xs" style={{ color: '#00C896' }}>
-                  Disponível CLT/PJ
+                  {t('availability')}
                 </span>
               </span>
             </motion.div>
@@ -111,9 +113,9 @@ export function Hero() {
                   e.preventDefault()
                   document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                aria-label="Ver projetos"
+                aria-label={t('ctaProjects')}
               >
-                Ver projetos
+                {t('ctaProjects')}
               </ButtonLink>
               <ButtonLink
                 href="#contact"
@@ -122,9 +124,9 @@ export function Hero() {
                   e.preventDefault()
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                aria-label="Entrar em contato"
+                aria-label={t('ctaContact')}
               >
-                Entrar em contato
+                {t('ctaContact')}
               </ButtonLink>
             </motion.div>
             <motion.div variants={fadeUpVariants} className="mt-8 flex flex-wrap gap-2">
@@ -158,7 +160,7 @@ export function Hero() {
           transition={{ delay: 1.2 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="font-mono text-xs text-[var(--muted)]">scroll</span>
+          <span className="font-mono text-xs text-[var(--muted)]">{t('scroll')}</span>
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

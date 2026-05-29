@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
 import {
   SiReact,
@@ -58,6 +59,7 @@ interface SkillsProps {
 }
 
 export function Skills({ skills }: SkillsProps) {
+  const t = useTranslations('skills')
   const { ref, isInView, groupedCategories } = useSkills(skills)
 
   return (
@@ -65,9 +67,9 @@ export function Skills({ skills }: SkillsProps) {
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle
           id="skills-heading"
-          title="Stack"
-          accent="// skills"
-          subtitle="Tecnologias e ferramentas que uso no dia a dia."
+          title={t('title')}
+          accent={t('accent')}
+          subtitle={t('subtitle')}
         />
 
         <div ref={ref as React.RefObject<HTMLDivElement>} className="space-y-12">
@@ -79,7 +81,7 @@ export function Skills({ skills }: SkillsProps) {
                 animate={isInView ? 'visible' : 'hidden'}
                 className="font-mono text-sm text-accent mb-4"
               >
-                {group.label.toLowerCase()}
+                {t(`categories.${group.key}`).toLowerCase()}
               </motion.h3>
               <motion.div
                 variants={staggerContainerVariants}

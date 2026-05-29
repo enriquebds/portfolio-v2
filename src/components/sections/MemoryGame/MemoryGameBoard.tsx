@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { CardTile } from './CardTile/CardTile'
 import { useMemoryGameBoard } from './useMemoryGameBoard'
+import { useTranslations } from 'next-intl'
 
 export function MemoryGameBoard() {
+  const t = useTranslations('game')
   const {
     cards,
     attempts,
@@ -22,18 +24,18 @@ export function MemoryGameBoard() {
       <div className="flex items-center justify-between mb-6 font-mono text-sm">
         <div className="flex gap-6">
           <span className="text-[var(--muted)]">
-            tentativas:{' '}
+            {t('attempts')}:{' '}
             <span style={{ color: '#00C896' }} className="font-bold">
               {attempts}
             </span>
           </span>
           <span className="text-[var(--muted)]">
-            tempo: <span className="text-[var(--text)] font-bold">{formattedTime}</span>
+            {t('time')}: <span className="text-[var(--text)] font-bold">{formattedTime}</span>
           </span>
         </div>
         {bestScore !== null && (
           <span className="text-[var(--muted)] text-xs">
-            melhor:{' '}
+            {t('best')}:{' '}
             <span style={{ color: '#F5A623' }} className="font-bold">
               {bestScore}
             </span>
@@ -51,16 +53,16 @@ export function MemoryGameBoard() {
           onClick={resetGame}
           className="font-mono text-xs flex items-center gap-2"
         >
-          ↺ reiniciar
+          {t('restart')}
         </Button>
         {gameState === 'idle' && (
           <Button size="sm" onClick={startGame}>
-            ▶ começar
+            {t('start')}
           </Button>
         )}
         {gameState === 'preview' && (
           <span className="font-mono text-xs animate-pulse" style={{ color: '#00C896' }}>
-            memorize as cartas...
+            {t('memorize')}
           </span>
         )}
       </div>
@@ -77,12 +79,12 @@ export function MemoryGameBoard() {
             }}
           >
             <p className="font-display font-bold text-2xl text-[var(--text)] mb-1">
-              🎉 Você venceu!
+              {t('wonTitle')}
             </p>
             <p className="font-mono text-sm text-[var(--muted)] mb-4">
-              {attempts} tentativas · {formattedTime}
+              {t('wonStats', { attempts, time: formattedTime })}
             </p>
-            <Button onClick={resetGame}>Jogar novamente</Button>
+            <Button onClick={resetGame}>{t('playAgain')}</Button>
           </motion.div>
         )}
       </AnimatePresence>
