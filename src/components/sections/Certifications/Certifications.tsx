@@ -57,9 +57,7 @@ export function Certifications({ certifications }: { certifications: Certificati
                       <p className="font-body font-medium text-sm text-[var(--text)] group-hover:text-accent transition-colors">
                         {cert.issuer}
                       </p>
-                      <p className="font-mono text-xs text-[var(--muted)] mt-0.5">
-                        {cert.title}
-                      </p>
+                      <p className="font-mono text-xs text-[var(--muted)] mt-0.5">{cert.title}</p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       {cert.date && (

@@ -74,9 +74,7 @@ export function About() {
               className="font-body text-[var(--muted)] leading-relaxed text-base mb-4"
             >
               {t.rich('paragraph1', {
-                strong: chunks => (
-                  <strong className="text-[var(--text)]">{chunks}</strong>
-                ),
+                strong: chunks => <strong className="text-[var(--text)]">{chunks}</strong>,
               })}
             </motion.p>
             <motion.p
@@ -121,7 +119,9 @@ export function About() {
               transition={{ delay: 0.4 }}
               className="mt-6 p-4 rounded-xl border border-[var(--border)] bg-[var(--card)]"
             >
-              <p className="font-mono text-xs text-[var(--muted)] mb-2">{t('availabilityComment')}</p>
+              <p className="font-mono text-xs text-[var(--muted)] mb-2">
+                {t('availabilityComment')}
+              </p>
               <div className="flex items-center gap-2">
                 <span
                   className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
