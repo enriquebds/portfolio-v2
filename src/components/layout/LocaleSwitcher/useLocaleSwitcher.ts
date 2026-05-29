@@ -1,7 +1,6 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 const LOCALES = ['pt-BR', 'en-US'] as const
 export type SwitcherLocale = (typeof LOCALES)[number]
@@ -19,7 +18,6 @@ function readCurrentLocale(): SwitcherLocale {
 }
 
 export function useLocaleSwitcher() {
-  const router = useRouter()
   const [currentLocale, setCurrentLocale] = useState<SwitcherLocale>('pt-BR')
   const [isOpen, setIsOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -38,15 +36,12 @@ export function useLocaleSwitcher() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isOpen])
 
-  const switchTo = useCallback(
-    (locale: SwitcherLocale) => {
-      document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`
-      setCurrentLocale(locale)
-      setIsOpen(false)
-      router.refresh()
-    },
-    [router],
-  )
+  const switchTo = useCallback((locale: SwitcherLocale) => {
+    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`
+    setCurrentLocale(locale)
+    setIsOpen(false)
+    window.location.reload()
+  }, [])
 
   return { currentLocale, isOpen, setIsOpen, switchTo, containerRef, locales: LOCALES, LOCALE_META }
 }
