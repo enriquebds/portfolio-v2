@@ -52,10 +52,10 @@ export function Certifications({ certifications }: { certifications: Certificati
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="font-mono font-medium text-xs text-(--text) mt-0.5">
+                      <p className="font-body font-medium text-sm text-[var(--text)] group-hover:text-accent transition-colors">
                         {cert.issuer}
                       </p>
-                      <p className="font-body  text-sm text-(--muted) group-hover:text-accent transition-colors">
+                      <p className="font-mono text-xs text-[var(--muted)] mt-0.5">
                         {cert.title}
                       </p>
                     </div>
