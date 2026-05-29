@@ -1,0 +1,16 @@
+echo "🔍 Verificando formatação com Prettier..."
+npm run format:check || {
+  echo ""
+  echo "❌ Prettier encontrou problemas. Rode 'npm run format' e faça commit."
+  exit 1
+}
+echo "✅ Formatação OK"
+
+echo ""
+echo "🏗️  Verificando build..."
+npm run build || {
+  echo ""
+  echo "❌ Build falhou. Corrija os erros antes de dar push."
+  exit 1
+}
+echo "✅ Build OK"
