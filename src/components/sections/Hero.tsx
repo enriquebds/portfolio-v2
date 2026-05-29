@@ -97,13 +97,6 @@ export function Hero() {
                 style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}
               >
                 <span>📍</span> {t('location')}
-                <span
-                  className="w-1.5 h-1.5 rounded-full animate-pulse"
-                  style={{ backgroundColor: '#00C896' }}
-                />
-                <span className="text-xs" style={{ color: '#00C896' }}>
-                  {t('availability')}
-                </span>
               </span>
             </motion.div>
             <motion.div variants={fadeUpVariants} className="mt-8 flex flex-wrap gap-3">
