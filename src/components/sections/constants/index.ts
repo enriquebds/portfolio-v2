@@ -32,13 +32,8 @@ const CONTACT_ITEMS = [
 ]
 
 const FORM_FIELDS = [
-  { name: 'name', label: 'Nome', type: 'text', placeholder: 'Seu nome' },
-  {
-    name: 'email',
-    label: 'Email',
-    type: 'email',
-    placeholder: 'seu@email.com',
-  },
+  { name: 'name', type: 'text' },
+  { name: 'email', type: 'email' },
 ] as const
 
 export { FORM_FIELDS, CONTACT_ITEMS }

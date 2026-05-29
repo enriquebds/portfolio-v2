@@ -75,11 +75,11 @@ export const floatVariants: Variants = {
 }
 
 export const navLinks = [
-  { href: '#about', label: 'Sobre' },
-  { href: '#experience', label: 'Experiência' },
-  { href: '#projects', label: 'Projetos' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#game', label: 'Game' },
-  { href: '#certifications', label: 'Formação' },
-  { href: '#contact', label: 'Contato' },
+  { href: '#about', key: 'about' },
+  { href: '#experience', key: 'experience' },
+  { href: '#projects', key: 'projects' },
+  { href: '#skills', key: 'skills' },
+  { href: '#game', key: 'game' },
+  { href: '#certifications', key: 'certifications' },
+  { href: '#contact', key: 'contact' },
 ]
