@@ -7,7 +7,7 @@ export const Certifications: CollectionConfig = {
     defaultColumns: ['title', 'issuer', 'type', 'order'],
   },
   fields: [
-    { name: 'title', type: 'text', required: true },
+    { name: 'title', type: 'text', required: true, localized: true },
     { name: 'issuer', type: 'text', required: true },
     {
       name: 'type',

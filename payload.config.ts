@@ -28,6 +28,11 @@ export default buildConfig({
     user: 'users',
     meta: { titleSuffix: '— Enrique Barbosa' },
   },
+  localization: {
+    locales: ['pt-BR', 'en-US'],
+    defaultLocale: 'pt-BR',
+    fallback: true,
+  },
   collections: [Users, Projects, Experience, Certifications, Skills, Media],
   editor: lexicalEditor({}),
   db: postgresAdapter({

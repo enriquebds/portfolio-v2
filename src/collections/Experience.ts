@@ -8,13 +8,14 @@ export const Experience: CollectionConfig = {
   },
   fields: [
     { name: 'company', type: 'text', required: true },
-    { name: 'role', type: 'text', required: true },
+    { name: 'role', type: 'text', required: true, localized: true },
     { name: 'startDate', type: 'date', required: true },
     { name: 'endDate', type: 'date' },
-    { name: 'location', type: 'text' },
+    { name: 'location', type: 'text', localized: true },
     {
       name: 'description',
       type: 'array',
+      localized: true,
       fields: [{ name: 'bullet', type: 'text' }],
     },
     { name: 'stack', type: 'array', fields: [{ name: 'tech', type: 'text' }] },

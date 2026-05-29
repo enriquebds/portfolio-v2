@@ -7,10 +7,10 @@ export const Projects: CollectionConfig = {
     defaultColumns: ['title', 'status', 'featured', 'order'],
   },
   fields: [
-    { name: 'title', type: 'text', required: true },
+    { name: 'title', type: 'text', required: true, localized: true },
     { name: 'slug', type: 'text', unique: true, required: true },
-    { name: 'description', type: 'textarea' },
-    { name: 'longDescription', type: 'richText' },
+    { name: 'description', type: 'textarea', localized: true },
+    { name: 'longDescription', type: 'richText', localized: true },
     { name: 'stack', type: 'array', fields: [{ name: 'tech', type: 'text' }] },
     { name: 'githubUrl', type: 'text' },
     { name: 'liveUrl', type: 'text' },
