@@ -1,18 +1,19 @@
 import { z } from 'zod'
 
-// Schema do formulário de contato — reutilizável no client e no server (Zod v4).
-export const contactSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, 'Informe seu nome (mínimo 2 caracteres).')
-    .max(100, 'Nome muito longo.'),
-  email: z.email('Informe um email válido.'),
-  message: z
-    .string()
-    .trim()
-    .min(10, 'A mensagem precisa ter pelo menos 10 caracteres.')
-    .max(2000, 'Mensagem muito longa (máximo 2000 caracteres).'),
-})
+interface ContactErrorMessages {
+  nameMin: string
+  nameMax: string
+  emailInvalid: string
+  messageMin: string
+  messageMax: string
+}
 
-export type ContactInput = z.infer<typeof contactSchema>
+export function buildContactSchema(msgs: ContactErrorMessages) {
+  return z.object({
+    name: z.string().trim().min(2, msgs.nameMin).max(100, msgs.nameMax),
+    email: z.email(msgs.emailInvalid),
+    message: z.string().trim().min(10, msgs.messageMin).max(2000, msgs.messageMax),
+  })
+}
+
+export type ContactInput = z.infer<ReturnType<typeof buildContactSchema>>

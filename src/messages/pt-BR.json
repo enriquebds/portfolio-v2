@@ -108,7 +108,18 @@
     "messageLabel": "mensagem",
     "messagePlaceholder": "Sua mensagem...",
     "submit": "Enviar mensagem ↗",
-    "submitting": "Enviando…"
+    "submitting": "Enviando…",
+    "successMessage": "Mensagem enviada! Retorno em breve.",
+    "emailSubject": "Contato via portfólio — {name}",
+    "errors": {
+      "nameMin": "Informe seu nome (mínimo 2 caracteres).",
+      "nameMax": "Nome muito longo.",
+      "emailInvalid": "Informe um email válido.",
+      "messageMin": "A mensagem precisa ter pelo menos 10 caracteres.",
+      "messageMax": "Mensagem muito longa (máximo 2000 caracteres).",
+      "invalidData": "Dados inválidos. Confira os campos e tente novamente.",
+      "sendError": "Não foi possível enviar agora. Tente novamente em instantes."
+    }
   },
   "footer": {
     "builtWith": "built with"

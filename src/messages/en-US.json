@@ -108,7 +108,18 @@
     "messageLabel": "message",
     "messagePlaceholder": "Your message...",
     "submit": "Send message ↗",
-    "submitting": "Sending…"
+    "submitting": "Sending…",
+    "successMessage": "Message sent! I'll get back to you soon.",
+    "emailSubject": "Portfolio contact — {name}",
+    "errors": {
+      "nameMin": "Please enter your name (minimum 2 characters).",
+      "nameMax": "Name is too long.",
+      "emailInvalid": "Please enter a valid email address.",
+      "messageMin": "Message must be at least 10 characters.",
+      "messageMax": "Message is too long (maximum 2000 characters).",
+      "invalidData": "Invalid data. Please check the fields and try again.",
+      "sendError": "Could not send right now. Please try again in a moment."
+    }
   },
   "footer": {
     "builtWith": "built with"
